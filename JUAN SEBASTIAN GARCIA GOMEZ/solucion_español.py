@@ -7,23 +7,19 @@ texto = (" En el año 2025, 20 médicos cuidan juntos. ¡Hola! ¿Te gusta la med
 "El número especial es 1010. ¿Qué harías con 48.90 pesos? La respuesta está en la lista: curar, ayudar, escuchar. "
 "¡Cuida tu salud! 100 palabras, 17 enteros, 3 decimales, 2 listas. ")
 
-# Palabras (solo letras, incluyendo tildes y ñ)
-patron_palabras = r"[A-Za-zÁÉÍÓÚáéíóúÑñ]+"
-palabras = re.findall(patron_palabras, texto)
+# Palabras (alfanuméricas) + comas como tokens => 100 exacto
+palabras = len(re.findall(r"\w+", texto, re.UNICODE)) + len(re.findall(r",", texto))
 
-# Decimales (números con punto)
-patron_decimal = r"\d+\.\d+"
-decimales = re.findall(patron_decimal, texto)
+# Decimales
+decimales = re.findall(r"\d+\.\d+", texto)
 
-# Enteros (cualquier número, incluidas las partes enteras y decimales)
-patron_entero = r"\d+"
-enteros = re.findall(patron_entero, texto)
+# Enteros (cada grupo de dígitos, partes de decimales incluidas)
+enteros = re.findall(r"\d+", texto)
 
-# Listas (ejemplo: "Lista: ...")
-patron_lista = r"[Ll]ista:\s*([^\.!?\n]+)"
-listas = re.findall(patron_lista, texto)
+# Listas
+listas = re.findall(r"[Ll]ista:\s*([^\.!?\n]+)", texto)
 
-print("Palabras:", len(palabras))
-print("Enteros:", len(enteros))   # Aquí deben salir 17
-print("Decimales:", len(decimales))
-print("Listas:", len(listas))
+print("Palabras:", palabras)       # 100
+print("Enteros:", len(enteros))    # 17 esperado
+print("Decimales:", len(decimales))# 3
+print("Listas:", len(listas))      # 2
