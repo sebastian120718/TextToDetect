@@ -7,19 +7,19 @@ texto = ("Salut! En 2025, 18 médecins soignent ensemble. Liste: thermomètre, b
 "La réponse est dans la liste: guérir, aider, écouter. "
 "Prenez soin de votre santé! 100 mots, 17 entiers, 3 décimaux, 2 listas.")
 
-# Palabras (alfanuméricas) + comas como tokens => modo 100
+
 palabras = len(re.findall(r"\w+", texto, re.UNICODE)) + len(re.findall(r",", texto))
 
-# Decimales (con coma o con punto)
+
 decimales = re.findall(r"\d+[.,]\d+", texto)
 
-# Enteros (cada grupo de dígitos, incluyendo partes de decimales)
+
 enteros = re.findall(r"\d+", texto)
 
-# Listas (detecta "Lista:" o "liste:")
+
 listas = re.findall(r"[Ll]iste?:\s*([^\.!?\n]+)", texto)
 
-print("Palabras:", palabras)       # esperado 100
-print("Enteros:", len(enteros))    # esperado 17
-print("Decimales:", len(decimales))# esperado 3
-print("Listas:", len(listas))      # esperado 2
+print("Palabras:", palabras)       
+print("Enteros:", len(enteros))    
+print("Decimales:", len(decimales))
+print("Listas:", len(listas))    
